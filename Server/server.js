@@ -14,7 +14,21 @@ connectCloudinary();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+// Middleware
+app.use(express.json());
+
+app.use(cors({
+  origin: "https://appointment-frontend-rouge.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+}));
+
+app.options("*", cors({
+  origin: "https://appointment-frontend-rouge.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+}));
+
 
 app.get('/', (req, res) => {
 res.send('Api is working')
@@ -31,4 +45,5 @@ connectDB().then(() => {
     app.listen(port, () => {
     console.log(`Server start ${port}`);
 })
+
 })
