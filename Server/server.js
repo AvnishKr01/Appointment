@@ -14,20 +14,13 @@ connectCloudinary();
 
 // Middleware
 app.use(express.json());
-// Middleware
-app.use(express.json());
-
 app.use(cors({
-  origin: "https://appointment-frontend-rouge.vercel.app",
+  origin: ["http://localhost:3000", "https://appointment-frontend-rouge.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 }));
 
-app.options("*", cors({
-  origin: "https://appointment-frontend-rouge.vercel.app",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-}));
+app.options("*", cors());
 
 
 app.get('/', (req, res) => {
@@ -47,3 +40,4 @@ connectDB().then(() => {
 })
 
 })
+
