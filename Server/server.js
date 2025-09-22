@@ -11,6 +11,7 @@ const userRouter = require('./routers/user-router');
 const app = express();
 const port = process.env.PORT || 4000;
 connectCloudinary();
+connectDB();
 
 // Middleware
 app.use(express.json());
@@ -34,10 +35,15 @@ app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
 // In server File Connection Of MongoDB
-connectDB().then(() => {
-    app.listen(port, () => {
-    console.log(`Server start ${port}`);
-})
+// ✅ Export app for Vercel
+module.exports = app;
 
-})
+// ✅ Only run app.listen() if running locally
+if (require.main === module) {
+  const port = process.env.PORT || 4000;
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+}
+
 
