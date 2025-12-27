@@ -15,11 +15,7 @@ connectDB();
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: ["http://localhost:3000", "https://appointment-frontend-rouge.vercel.app"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
-}));
+app.use(cors());
 
 app.options("*", cors());
 
@@ -45,6 +41,7 @@ if (require.main === module) {
     console.log(`Server running on port ${port}`);
   });
 }
+
 
 
 
